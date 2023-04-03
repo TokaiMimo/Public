@@ -1,0 +1,56 @@
+
+<div class="card">
+    <div class="card-title" >
+        ${title}
+    </div>
+    <div class="card-photo">
+        <img src="${photo}" >
+    </div>
+    <div class="card-rating">
+        Рейтинг: ${rating}
+    </div>
+    <div class="card-age">
+        Возрастные ограничения: ${age}
+    </div>
+    <div class="card-episodes">
+        Серий: ${episodes}
+    </div>
+</div>
+
+
+
+<script>
+
+    let postman = new XMLHttpRequest();
+
+    postman.open("GET","https://kitsu.io/api/edge/anime",false);
+
+    postman.send();
+
+    let json = postman.responseText;
+
+    console.log(json);
+
+    let info = JSON.parse(json);
+
+    console.log(info);
+
+    let html = document.querySelector(".card").innerHTML;
+
+    document.querySelector(".card").innerHTML = html.replace("${photo}",   info['data'][0]['attributes']['posterImage']['large'])
+                                                    .replace("${title}",   info['data'][0]['attributes']['titles']['en'])    
+                                                    .replace("${rating}",  info['data'][0]['attributes']['averageRating'])  
+                                                    .replace("${age}",     info['data'][0]['attributes']['ageRatingGuide'])  
+                                                    .replace("${episodes}",info['data'][0]['attributes']['episodeCount']);                              ;
+
+    /*
+    document.querySelector("#pic").src = info['data'][0]['attributes']['posterImage']['large'];
+    document.querySelector("#title").innerHTML = info['data'][0]['attributes']['titles']['en'];
+    document.querySelector("#rating").innerHTML = info['data'][0]['attributes']['averageRating'];
+    document.querySelector("#age").innerHTML = info['data'][0]['attributes']['ageRatingGuide'];
+    document.querySelector("#episodes").innerHTML = info['data'][0]['attributes']['episodeCount'];
+    */
+
+
+
+</script>
