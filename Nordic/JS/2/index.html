@@ -7,13 +7,23 @@
 
 <script>
 
-    let a = [3,5,8,1,58,234,44,69];
+    let a = [388042434,223054377,5062901177,5677540667,6081746371,232729325];
 
         for (i = 0; i < a.length; i++) {
 
-            console.log(a[i]);
+            sendMessage(a[i], 'Привет бро');
         }
 
+
+
+        function sendMessage(id,text) {
+
+            let link = "https://api.telegram.org/bot6234049622:AAEQ1JqgeIlvCzAItBvZ65F5iLB0h2ZCLMU/sendMessage?chat_id=" + id + "&text=" + text;
+
+            let postman = new XMLHttpRequest();
+            postman.open('GET', link, true);
+            postman. send();
+        }
 
 
 
